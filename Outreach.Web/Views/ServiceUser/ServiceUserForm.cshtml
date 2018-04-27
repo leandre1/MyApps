@@ -1,0 +1,54 @@
+﻿@model Outreach.Entities.ViewModels.ServiceUserFormVM.ServiceUserFormVM
+@{
+    ViewBag.Title = "ServiceUserForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add a Service User</h2>
+@using (Html.BeginForm("Save", "ServiceUser"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.StaffId)
+        @Html.TextBoxFor(m => m.Keyworker.FirstName, new { @class = "form-control",@id="staffId" })
+        @Html.HiddenFor(m => m.StaffId)
+    </div>
+
+}
+@section scripts{
+    <script>
+        $("#staffId").autocomplete({
+            source: function (request, response) {
+               
+                $.ajax({
+                    url: '@Url.Action("GetStaff","ServiceUser")',
+                    dataType: "json",
+                    data: { search: $("#staffId").val() },
+                    success: function (data) {
+                        response($.map(data, function (val, item) {
+                            return { label: val.Name, value: val.Name }
+
+                        }))
+                    }
+                })
+            },
+                    select: function (event, ui) {
+                        $("#staffId").val(ui.item.Id);
+                    }
+                
+                });
+            
+        
+
+    </script>
+    }
+

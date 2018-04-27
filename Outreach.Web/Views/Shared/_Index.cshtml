@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Outreach.Entities.HouseViewModels.HouseDisplayModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Houses with their Branches</h2>
+@*<a href="@Url.Action("Create","Branch")" data-toggle="modal" data-target="#myModal" class="btn btn-primary" id="add-branch">Add new Branch</a>*@
+<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-primary" id="add-branch">Add new Branch</a>
+
+<table id="house" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>BranchName</th>
+            <th>BranchPhone</th>
+            <th>HouseName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var b in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(b.Branch.Name,"Edit","Branch", new { id = b.Branch.BranchId},null)</td>
+                <td>@b.Branch.Phone</td>
+                <td>@b.House.HouseName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#house").DataTable();
+        });
+    </script>
+
+}
+
+

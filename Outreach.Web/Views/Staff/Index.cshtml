@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Outreach.Entities.ViewModels.StaffViewModels.StaffBranchVM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List the Staff and their branches</h2>
+<table class="table table-bordered table-hover" id="staffTable">
+    <thead>
+        <tr>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>BranchName</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        $(document).ready(function(){
+            GetStaffData();
+        })
+        var GetStaffData = function () {
+            $.ajax({
+                type: "Get",
+                url: "@Url.Action("GetData","Staff")",
+                dataType: "Json",
+                success: function (response) {
+                    BindData(response);
+                }
+            })
+        }
+        var BindData = function (response) {
+         
+            $("#staffTable").DataTable({
+                
+                "aaData": response,
+                "aoColumns": [
+                    
+                    {
+                        "mData": "Staff.FirstName",
+                        "render": function (data, type, full, meta) {
+                            
+                            return '<a href="/Staff/ShowProfile/'+full.Staff.StaffId+'">'+data+'</a>';
+                        }
+                    },
+                    { "mData": "Staff.LastName" },
+                    { "mData": "Branch.Name" }
+                    
+                ]
+            })
+        }
+    </script>
+    }
+

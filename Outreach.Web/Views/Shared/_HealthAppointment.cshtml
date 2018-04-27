@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Outreach.Entities.ViewModels.ServiceUserViewModels.ServiceUserMedicalAppointmentVM>
+<h2>List of Health Appointment</h2>
+<table class="table table-bordered table-hover" id="Appointment">
+    <thead>
+        <tr>
+            <th>
+                Date of Appointment
+            </th>
+            <th>
+                Doctor
+            </th>
+            <th>
+                Reason
+            </th>
+            <th>
+                Location
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.HealthAppointment.AppointmentDate</td>
+                <td>@item.Doctor.FirstName @item.Doctor.LastName</td>
+                <td>@item.HealthAppointment.Reason</td>
+                <td>@item.Doctor.Location</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            $("#Appointment").DataTable();
+        });
+    </script>
+}

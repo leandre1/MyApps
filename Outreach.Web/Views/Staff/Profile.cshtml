@@ -1,0 +1,42 @@
+﻿@model Outreach.Entities.ViewModels.StaffViewModels.StaffProfileVM
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Staff Profile</h2>
+<div class="panel panel-body">
+    <div class="col-md-9">
+        <h2 class="panel-title">
+            @Model.StaffBranchVM.Staff.FirstName @Model.StaffBranchVM.Staff.LastName
+        </h2>
+        <hr id="hr" />
+        <ul id="profileUL"class="list-group">
+            @foreach(var item in Model.StaffStandardMenus)
+            {
+                <li class="list-group-item">@item.Name</li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Staff</h1>
+            </div>
+            <div class="panel-body">
+                <img class="img-responsive" src="@Model.StaffBranchVM.Staff.ImageUrl" width="150" height="145"  />
+                <div class="panel-heading">
+                    <h3 class="panel-title">Contacts</h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li class="glyphicon glyphicon-phone"> @Model.StaffBranchVM.Branch.Phone<br /></li>
+                        <li class="glyphicon glyphicon-home"> @Model.StaffBranchVM.Branch.Name</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

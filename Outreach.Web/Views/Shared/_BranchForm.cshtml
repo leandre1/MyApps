@@ -1,0 +1,30 @@
+﻿@model Outreach.Entities.HouseViewModels.BranchFormModel
+
+@using (Html.BeginForm("Save", "Branch",FormMethod.Post,new { id = "myForm"}))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Branch.Name)
+        @Html.TextBoxFor(m => m.Branch.Name, new { @class = "form-control" })
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Branch.Phone)
+        @Html.TextBoxFor(m => m.Branch.Phone, new { @class = "form-control" })
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Branch.HouseId)
+        @Html.DropDownListFor(m => m.Branch.HouseId,
+                                           new SelectList(Model.Houses, "HouseId", "HouseName"),
+                                           "Select house",
+                                            new { @class = "form-control" })
+
+    </div>
+    @Html.HiddenFor(m => m.Branch.BranchId)
+
+    @*<button type="submit" class="btn btn-primary">Save</button>*@
+
+}
+
+

@@ -1,0 +1,57 @@
+﻿@model Outreach.Entities.ViewModels.ServiceUserViewModels.ServiceUserProfile
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Service User Profile</h2>
+
+<div class="panel panel-body">
+    <div class="col-md-9">
+
+        <h2>@Model.serviceUser.FirstName @Model.serviceUser.LastName</h2>
+        <ul id="profileUL" class="list-group">
+            @if (Model.UserMenu != null)
+            {
+                foreach (var item in Model.UserMenu)
+                {
+
+                        <li class="list-group-item">
+                            @Ajax.ActionLink(@item.ItemMenuName, "DisplayViewMenu", "ServiceUser",
+                              new { id = item.Id },
+                              new AjaxOptions { UpdateTargetId = "search" })
+                    </li>
+                }
+            }
+        </ul>
+        <hr />
+        <div id="search">
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Service User</h1>
+            </div>
+            <div class="panel-body">
+                <img src="@Model.serviceUser.ImageUrl" class="img-responsive" />
+
+                <ul>
+                    <li>
+                        Contact No:
+                        <p class="glyphicon glyphicon-phone">@Model.branch.Phone</p>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+
+    </script>
+}
